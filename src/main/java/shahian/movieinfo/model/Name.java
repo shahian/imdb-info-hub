@@ -1,10 +1,21 @@
 package shahian.movieinfo.model;
 
-import jakarta.persistence.*;
-import lombok.*;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Index;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "name_basics", indexes = {
@@ -40,24 +51,5 @@ public class Name {
 	@OneToMany(mappedBy = "name", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@Builder.Default
 	private List<TitlePrincipal> principals = new ArrayList<>();
-
-
-	public boolean isAlive() {
-		return deathYear == null;
-	}
-
-	public String[] getProfessions() {
-		if (primaryProfession == null || primaryProfession.equals("\\N")) {
-			return new String[0];
-		}
-		return primaryProfession.split(",");
-	}
-
-	public String[] getKnownForTitleIds() {
-		if (knownForTitles == null || knownForTitles.equals("\\N")) {
-			return new String[0];
-		}
-		return knownForTitles.split(",");
-	}
 
 }
