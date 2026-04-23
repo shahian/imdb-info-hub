@@ -1,4 +1,4 @@
-package shahian.example.imdbinfohub;
+package shahian.movieinfo.model;
 
 import org.junit.jupiter.api.Test;
 
