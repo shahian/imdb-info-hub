@@ -1,7 +1,21 @@
 package shahian.movieinfo.model;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "title_principals", indexes = {
@@ -17,9 +31,8 @@ import lombok.*;
 @Builder
 public class TitlePrincipal {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@EmbeddedId
+	private TitlePrincipalId id;
 
 	@Column(name = "tconst", length = 20, nullable = false)
 	private String tconst;
@@ -46,36 +59,4 @@ public class TitlePrincipal {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "nconst", insertable = false, updatable = false)
 	private Name name;
-
-	/**
-	 * بررسی اینکه آیا شخص بازیگر است
-	 */
-	public boolean isActor() {
-		return category != null && (category.equals("actor") || category.equals("actress"));
-	}
-
-	/**
-	 * بررسی اینکه آیا شخص کارگردان است
-	 */
-	public boolean isDirector() {
-		return category != null && category.equals("director");
-	}
-
-	/**
-	 * بررسی اینکه آیا شخص نویسنده است
-	 */
-	public boolean isWriter() {
-		return category != null && category.equals("writer");
-	}
-
-	/**
-	 * گرفتن نقش‌های کاراکتری (characters)
-	 */
-	public String[] getCharacterArray() {
-		if (characters == null || characters.equals("\\N")) {
-			return new String[0];
-		}
-		return characters.split(",");
-	}
-
 }
