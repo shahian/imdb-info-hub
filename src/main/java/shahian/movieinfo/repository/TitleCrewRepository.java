@@ -15,7 +15,6 @@ public interface TitleCrewRepository extends JpaRepository<TitleCrew, String> {
 	@Query("SELECT tc FROM TitleCrew tc WHERE tc.directors = tc.writers")
 	List<TitleCrew> findWhereDirectorEqualsWriter();
 
-	// یا بهتر: پیدا کردن فیلم‌هایی که یک شخص خاص هم کارگردان و نویسنده است
 	@Query("SELECT tc FROM TitleCrew tc WHERE tc.directors LIKE %:nconst% AND tc.writers LIKE %:nconst%")
 	List<TitleCrew> findByBothDirectorAndWriter(@Param("nconst") String nconst);
 
