@@ -4,9 +4,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -34,12 +31,6 @@ public class TitlePrincipal {
 	@EmbeddedId
 	private TitlePrincipalId id;
 
-	@Column(name = "tconst", length = 20, nullable = false)
-	private String tconst;
-
-	@Column(name = "ordering")
-	private Integer ordering;
-
 	@Column(name = "nconst", length = 20, nullable = false)
 	private String nconst;
 
@@ -59,4 +50,26 @@ public class TitlePrincipal {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "nconst", insertable = false, updatable = false)
 	private Name name;
+
+	public String getTconst() {
+		return id != null ? id.getTconst() : null;
+	}
+
+	public void setTconst(String tconst) {
+		if (id == null) {
+			id = new TitlePrincipalId();
+		}
+		id.setTconst(tconst);
+	}
+
+	public Integer getOrdering() {
+		return id != null ? id.getOrdering() : null;
+	}
+
+	public void setOrdering(Integer ordering) {
+		if (id == null) {
+			id = new TitlePrincipalId();
+		}
+		id.setOrdering(ordering);
+	}
 }
