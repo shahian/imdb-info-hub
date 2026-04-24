@@ -1,4 +1,4 @@
-package shahian.movieinfo.api.controller;
+package shahian.movieinfo.controller;
 
 import java.util.List;
 
