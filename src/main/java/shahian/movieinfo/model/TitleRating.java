@@ -1,0 +1,39 @@
+package shahian.movieinfo.model;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapsId;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name = "title_ratings")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class TitleRating {
+
+	@Id
+	@Column(name = "tconst", length = 20, nullable = false)
+	private String tconst;
+
+	@Column(name = "average_rating")
+	private Double averageRating;
+
+	@Column(name = "num_votes")
+	private Integer numVotes;
+
+	@OneToOne(fetch = FetchType.LAZY)
+	@MapsId
+	@JoinColumn(name = "tconst")
+	private Title title;
+}
