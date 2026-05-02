@@ -1,15 +1,16 @@
 package shahian.movieinfo.repository;
 
 import java.util.List;
+
 import shahian.movieinfo.model.TitlePrincipal;
-import shahian.movieinfo.model.TitlePrincipalId;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TitlePrincipalRepository extends JpaRepository<TitlePrincipal, TitlePrincipalId> {
+public interface TitlePrincipalRepository extends JpaRepository<TitlePrincipal, String> {
 
 	@Query("SELECT DISTINCT tp1.id.tconst FROM TitlePrincipal tp1, TitlePrincipal tp2 " +
 			"WHERE tp1.id.tconst = tp2.id.tconst " +

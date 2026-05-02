@@ -42,10 +42,10 @@ public class Name {
 	@Column(name = "death_year")
 	private Integer deathYear;
 
-	@Column(name = "primary_profession", length = 500)
+	@Column(name = "primary_profession", columnDefinition = "TEXT")
 	private String primaryProfession;
 
-	@Column(name = "known_for_titles", length = 500)
+	@Column(name = "known_for_titles", columnDefinition = "TEXT")
 	private String knownForTitles;
 
 	@OneToMany(mappedBy = "name", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -37,18 +38,20 @@ public class TitlePrincipal {
 	@Column(name = "category", length = 50)
 	private String category;
 
-	@Column(name = "job", length = 500)
+	@Column(name = "job", length = 1000)
 	private String job;
 
-	@Column(name = "characters", length = 1000)
+	@Column(name = "characters",  columnDefinition = "TEXT")
 	private String characters;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "tconst", insertable = false, updatable = false)
+	@JsonIgnore
 	private Title title;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "nconst", insertable = false, updatable = false)
+	@JsonIgnore
 	private Name name;
 
 	public String getTconst() {

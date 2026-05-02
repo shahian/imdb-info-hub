@@ -1,6 +1,8 @@
 package shahian.movieinfo.model;
 
 import jakarta.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -44,17 +46,20 @@ public class Title {
 	@Column(name = "runtime_minutes")
 	private Integer runtimeMinutes;
 
-	@Column(name = "genres", length = 200)
+	@Column(name = "genres", columnDefinition = "TEXT")
 	private String genres;
 
 	@OneToOne(mappedBy = "title", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private TitleCrew crew;
 
 	@OneToOne(mappedBy = "title", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private TitleRating rating;
 
 	@OneToMany(mappedBy = "title", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@Builder.Default
+	@JsonIgnore
 	private List<TitlePrincipal> principals = new ArrayList<>();
 
 
