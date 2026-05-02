@@ -49,7 +49,7 @@ public class DataImportServiceImpl {
 	private String principalsUrl;
 
 	private static final int BATCH_SIZE = 200;
-	private static final int MAX_RECORDS = 1_000_000;
+	//private static final int MAX_RECORDS = 1_000_000;
 	private static final boolean LIMIT_RECORDS = true;
 
 	@PostConstruct
@@ -171,10 +171,10 @@ public class DataImportServiceImpl {
 				long startTime = System.currentTimeMillis();
 
 				for (CSVRecord record : parser) {
-					if (LIMIT_RECORDS && count >= MAX_RECORDS) {
-						log.info("{} reached limit of {} records, stopping import", logPrefix, MAX_RECORDS);
-						break;
-					}
+//					if (LIMIT_RECORDS && count >= MAX_RECORDS) {
+//						log.info("{} reached limit of {} records, stopping import", logPrefix, MAX_RECORDS);
+//						break;
+//					}
 					batch.add(mapper.map(record));
 					if (batch.size() >= BATCH_SIZE) {
 						count += flushBatch(sql, batch);
