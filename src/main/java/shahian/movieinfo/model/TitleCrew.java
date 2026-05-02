@@ -9,6 +9,7 @@ import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,15 +27,16 @@ public class TitleCrew {
 	@Column(name = "tconst", length = 20, nullable = false)
 	private String tconst;
 
-	@Column(name = "directors", length = 1000)
+	@Column(name = "directors",  columnDefinition = "TEXT")
 	private String directors;
 
-	@Column(name = "writers", length = 1000)
+	@Column(name = "writers", columnDefinition = "TEXT")
 	private String writers;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@MapsId
 	@JoinColumn(name = "tconst")
+	@JsonIgnore
 	private Title title;
 
 }

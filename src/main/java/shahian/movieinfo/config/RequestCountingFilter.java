@@ -21,8 +21,7 @@ public class RequestCountingFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
-		if (httpRequest.getRequestURI()
-				.startsWith("/api/")) {
+		if (httpRequest.getRequestURI().startsWith("/api/") && !httpRequest.getRequestURI().startsWith("/api/v1/stats")) {
 			requestCount.incrementAndGet();
 		}
 		chain.doFilter(request, response);

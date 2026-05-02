@@ -9,6 +9,7 @@ import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,5 +36,6 @@ public class TitleRating {
 	@OneToOne(fetch = FetchType.LAZY)
 	@MapsId
 	@JoinColumn(name = "tconst")
+	@JsonIgnore
 	private Title title;
 }
