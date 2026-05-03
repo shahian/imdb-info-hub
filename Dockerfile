@@ -4,6 +4,9 @@ WORKDIR /app
 
 COPY target/*.jar app.jar
 
+# Install CA certificates
+RUN apt-get update && apt-get install -y ca-certificates && update-ca-certificates
+
 # Create directory for H2 database
 RUN mkdir -p /app/h2db && \
     chown -R 1000:1000 /app
